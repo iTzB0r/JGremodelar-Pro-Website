@@ -1,0 +1,131 @@
+# =============================================================================
+# .htaccess — JGremodelar.pt
+# Otimizado para cache, compressão Gzip, segurança e desempenho
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# Ativar o motor de reescrita (útil para SEO e URLs limpas)
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Redirecionar www para não-www (ou vice-versa — ajuste conforme preferir)
+    # Descomente as linhas abaixo para forçar SEM www:
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # Redirecionar HTTP para HTTPS (obrigatório)
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # --- URLs Amigáveis: remover extensão .html ---
+    # 1) Se o pedido não for um ficheiro ou diretório real,
+    #    verificar se existe o .html correspondente e servir esse
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}\.html -f
+    RewriteRule ^(.*)$ $1.html [NC,L]
+
+    # 2) Redirecionar 301 de URLs com .html para a versão sem extensão
+    RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+    RewriteRule ^ /%1 [NC,L,R=301]
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Compressão Gzip — reduz o tamanho dos ficheiros transferidos
+# ---------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+    # Comprimir HTML, CSS, JS, XML, JSON, fontes, SVG
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+    AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+    AddOutputFilterByType DEFLATE application/xml application/rss+xml
+    AddOutputFilterByType DEFLATE image/svg+xml
+    AddOutputFilterByType DEFLATE application/vnd.ms-fontobject application/x-font-ttf
+    AddOutputFilterByType DEFLATE font/opentype font/woff font/woff2
+
+    # Remover browser bugs
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Cache do browser — ficheiros estáticos com validade prolongada
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # Por omissão: 1 mês
+    ExpiresDefault "access plus 1 month"
+
+    # HTML e XML: 0 (sempre frescos)
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType application/xml "access plus 0 seconds"
+
+    # CSS e JS: 1 ano (usar versionamento ?v= no index.html se alterar)
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+
+    # Imagens, ícones, vídeos: 1 ano
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+
+    # Fontes: 1 ano
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/x-font-ttf "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # Cache-Control headers para reforçar as regras acima
+    <filesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|webp|svg|js|css|woff|woff2)$">
+        Header set Cache-Control "max-age=31536000, public, immutable"
+    </filesMatch>
+
+    # HTML deve ser sempre revalidado
+    <filesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=0, private, must-revalidate"
+    </filesMatch>
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Segurança básica
+# ---------------------------------------------------------------------------
+# Proteger ficheiros sensíveis
+<FilesMatch "^\.(htaccess|htpasswd|git|env)">
+    Require all denied
+</FilesMatch>
+
+# Desativar listagem de diretórios
+Options -Indexes
+
+# Desativar o server signature
+ServerSignature Off
+
+# Definir charset
+AddDefaultCharset UTF-8
+
+# ---------------------------------------------------------------------------
+# Headers de segurança
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    # Prevenir MIME-type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Proteção contra clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Ativar proteção XSS nos browsers mais antigos
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
