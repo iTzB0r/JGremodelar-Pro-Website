@@ -1,0 +1,11 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jgremode/public_html
+    - /bin/cp -R assets $DEPLOYPATH
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp quem-somos.html $DEPLOYPATH
+    - /bin/cp contacto.html $DEPLOYPATH
+    - /bin/cp servicos-exteriores.html $DEPLOYPATH
+    - /bin/cp servicos-interiores.html $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
