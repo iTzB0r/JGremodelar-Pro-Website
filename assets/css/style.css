@@ -185,7 +185,7 @@ ul {
 }
 
 .navbar.scrolled {
-  background: rgba(26, 54, 93, 0.97);
+  background: rgba(211, 84, 0, 0.97); /* Fundo Laranja ao rolar */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
@@ -206,14 +206,6 @@ ul {
   font-size: 1.35rem;
   color: var(--color-white);
   text-decoration: none;
-}
-
-/* NOVO: Caixinha branca exclusiva para a logo */
-.navbar-brand img {
-  background-color: var(--color-white);
-  padding: 6px 12px;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-brand .brand-icon {
@@ -249,7 +241,7 @@ ul {
 }
 
 .nav-links a {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.95);
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.5rem 0.85rem;
@@ -267,7 +259,7 @@ ul {
   transform: translateX(-50%) scaleX(0);
   width: calc(100% - 1.7rem);
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-primary-dark);
   transition: transform var(--transition-base);
   transform-origin: center;
 }
@@ -275,7 +267,7 @@ ul {
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--color-white);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .nav-links a:hover::after,
@@ -284,7 +276,7 @@ ul {
 }
 
 .nav-cta {
-  background: var(--color-accent) !important;
+  background: var(--color-primary) !important; /* Botão Azul Escuro */
   color: var(--color-white) !important;
   padding: 0.5rem 1.25rem !important;
   border-radius: var(--radius-sm) !important;
@@ -296,9 +288,9 @@ ul {
 }
 
 .nav-cta:hover {
-  background: var(--color-accent-dark) !important;
+  background: var(--color-primary-dark) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
 }
 
 /* Hamburger */
@@ -350,7 +342,8 @@ ul {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-primary-light) 100%);
+  /* Fundo principal em Laranja */
+  background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-accent-light) 100%);
   z-index: 0;
 }
 
@@ -359,9 +352,9 @@ ul {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(230, 126, 34, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 50%, rgba(26, 54, 93, 0.15) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, rgba(26, 54, 93, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 50%);
+    radial-gradient(ellipse at 50% 80%, rgba(26, 54, 93, 0.1) 0%, transparent 50%);
 }
 
 .hero-pattern {
@@ -404,11 +397,11 @@ ul {
   font-size: 0.85rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: var(--color-gray-200);
+  color: var(--color-white);
 }
 
 .hero-badge span {
-  color: var(--color-accent-light);
+  color: var(--color-primary-dark); /* Texto pequeno em azul escuro */
 }
 
 .hero h1 {
@@ -420,7 +413,8 @@ ul {
 }
 
 .hero h1 .highlight {
-  background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
+  /* Texto de destaque "lar dos seus sonhos" em azul escuro */
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -428,7 +422,7 @@ ul {
 
 .hero p {
   font-size: clamp(1rem, 2vw, 1.2rem);
-  color: var(--color-gray-300);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 650px;
   margin: 0 auto 2rem;
   line-height: 1.7;
@@ -464,7 +458,7 @@ ul {
 
 .hero-stat-label {
   font-size: 0.8rem;
-  color: var(--color-gray-400);
+  color: rgba(255, 255, 255, 0.8);
   margin-top: 0.35rem;
 }
 
@@ -617,7 +611,7 @@ ul {
 .page-hero {
   position: relative;
   padding: 10rem 0 5rem;
-  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent)); /* Topo das páginas internas em laranja */
   color: var(--color-white);
   text-align: center;
   overflow: hidden;
@@ -628,8 +622,8 @@ ul {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 80% 20%, rgba(230, 126, 34, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse at 20% 80%, rgba(243, 156, 18, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 80% 20%, rgba(26, 54, 93, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(26, 54, 93, 0.1) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -647,7 +641,7 @@ ul {
 
 .page-hero p {
   font-size: 1.1rem;
-  color: var(--color-gray-300);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -1176,7 +1170,7 @@ textarea.form-control {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: var(--color-primary-dark);
+    background: var(--color-accent);
     flex-direction: column;
     align-items: flex-start;
     padding: 5rem 2rem 2rem;
