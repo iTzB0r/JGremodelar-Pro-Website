@@ -182,13 +182,16 @@ ul {
   z-index: 1000;
   padding: 0.75rem 0;
   transition: all var(--transition-base);
+  background: rgba(15, 35, 64, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .navbar.scrolled {
-  background: rgba(211, 84, 0, 0.97); /* Fundo Laranja ao rolar */
+  background: rgba(10, 25, 47, 0.97);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 25px rgba(0, 0, 0, 0.25);
   padding: 0.5rem 0;
 }
 
@@ -206,6 +209,12 @@ ul {
   font-size: 1.35rem;
   color: var(--color-white);
   text-decoration: none;
+}
+
+/* O TRUQUE MÁGICO: Transforma a logo original em 100% branca e tira as sombras sujas */
+.navbar-brand img,
+.footer-brand img {
+  filter: brightness(0) invert(1);
 }
 
 .navbar-brand .brand-icon {
@@ -259,7 +268,7 @@ ul {
   transform: translateX(-50%) scaleX(0);
   width: calc(100% - 1.7rem);
   height: 2px;
-  background: var(--color-primary-dark);
+  background: var(--color-accent-light);
   transition: transform var(--transition-base);
   transform-origin: center;
 }
@@ -276,7 +285,7 @@ ul {
 }
 
 .nav-cta {
-  background: var(--color-primary) !important; /* Botão Azul Escuro */
+  background: var(--color-accent) !important;
   color: var(--color-white) !important;
   padding: 0.5rem 1.25rem !important;
   border-radius: var(--radius-sm) !important;
@@ -288,9 +297,9 @@ ul {
 }
 
 .nav-cta:hover {
-  background: var(--color-primary-dark) !important;
+  background: var(--color-accent-dark) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
 }
 
 /* Hamburger */
@@ -342,8 +351,7 @@ ul {
 .hero-bg {
   position: absolute;
   inset: 0;
-  /* Fundo principal em Laranja */
-  background: linear-gradient(135deg, var(--color-accent-dark) 0%, var(--color-accent) 50%, var(--color-accent-light) 100%);
+  background: linear-gradient(135deg, #0a192f 0%, #112240 40%, #1a365d 70%, #1e3a5f 100%);
   z-index: 0;
 }
 
@@ -352,9 +360,9 @@ ul {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(26, 54, 93, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(26, 54, 93, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(26, 54, 93, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at 25% 45%, rgba(230, 126, 34, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 25%, rgba(243, 156, 18, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 80%, rgba(26, 54, 93, 0.2) 0%, transparent 45%);
 }
 
 .hero-pattern {
@@ -401,7 +409,7 @@ ul {
 }
 
 .hero-badge span {
-  color: var(--color-primary-dark); /* Texto pequeno em azul escuro */
+  color: var(--color-accent-light);
 }
 
 .hero h1 {
@@ -413,8 +421,7 @@ ul {
 }
 
 .hero h1 .highlight {
-  /* Texto de destaque "lar dos seus sonhos" em azul escuro */
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary-dark));
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -611,7 +618,7 @@ ul {
 .page-hero {
   position: relative;
   padding: 10rem 0 5rem;
-  background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent)); /* Topo das páginas internas em laranja */
+  background: linear-gradient(135deg, #0a192f 0%, #112240 40%, #1a365d 70%, #1e3a5f 100%);
   color: var(--color-white);
   text-align: center;
   overflow: hidden;
@@ -622,8 +629,8 @@ ul {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 80% 20%, rgba(26, 54, 93, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 20% 80%, rgba(26, 54, 93, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at 80% 20%, rgba(230, 126, 34, 0.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 20% 80%, rgba(243, 156, 18, 0.05) 0%, transparent 45%);
   pointer-events: none;
 }
 
@@ -1170,7 +1177,7 @@ textarea.form-control {
     right: -100%;
     width: 280px;
     height: 100vh;
-    background: var(--color-accent);
+    background: #0a192f;
     flex-direction: column;
     align-items: flex-start;
     padding: 5rem 2rem 2rem;
